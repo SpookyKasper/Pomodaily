@@ -1,7 +1,5 @@
-import toDoItem from './toDo-item.js';
+import toDoItem from './to-do-item.js';
 
-const myItem = toDoItem('peak')
+const myToDoItem = toDoItem('peak')
 
-console.log(myItem.getTitle())
-myItem.setTitle('time')
-console.log(myItem.getTitle())
+console.log(myToDoItem)
