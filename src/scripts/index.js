@@ -1,11 +1,14 @@
-import toDoItem from './to-do-item.js';
-import toDoList from './to-do-lists.js'
+import '../styles/index.css'
+import createToDoItem from './to-do-item.js';
+import createToDoList from './lists/to-do-lists.js'
+import { populatedListContainer } from './lists/dom-utils.js';
 
-const myToDoItem = toDoItem('Create Basic Logic')
-const myList = toDoList('Build To-Do App')
-myList.addToDo(myToDoItem)
 
-myList.getToDos().forEach(toDo => {
-  console.log(toDo.itemTitle)
-  console.log(toDo.itemDueDate)
-});
+const myToDo = createToDoItem()
+const myList = createToDoList('Build To-Do App')
+myList.addToDo(myToDo)
+const myLists = [myList]
+
+document.body.append(populatedListContainer(myLists))
+
+

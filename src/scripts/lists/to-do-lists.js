@@ -5,8 +5,8 @@ export default function createToDoList(title = '', toDos = []) {
 
   const getTitle = () => listTitle
   const getToDos = () => listToDos
-  const addToDo = (project) => {
-    listToDos.push(project)
+  const addToDo = (toDoItem) => {
+    listToDos.push(toDoItem)
   }
 
   return {

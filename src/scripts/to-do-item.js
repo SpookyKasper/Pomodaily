@@ -1,4 +1,3 @@
-
 export default function createToDoItem(title = 'to-do', description = '', dueDate = new Date(), priority = 'red', status = 'in-progress') {
 
   let itemTitle = title
@@ -18,12 +17,16 @@ export default function createToDoItem(title = 'to-do', description = '', dueDat
   const getStatus = () => itemStatus
   const setStatus = (newStatus) => itemStatus = newStatus
 
-
   return {
-    itemTitle,
-    itemDescription,
-    itemDueDate,
-    itemPriority,
-    itemStatus
+    getTitle,
+    setTitle,
+    getDescription,
+    setDescription,
+    getDueDate,
+    setDueDate,
+    getPriority,
+    setPriority,
+    getStatus,
+    setStatus
   }
 }
