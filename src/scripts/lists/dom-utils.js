@@ -1,27 +1,54 @@
+import '../../styles/home.css'
+import { format } from "date-fns";
 
-export function createListsContainerEl() {
-  const listsContainer = document.createElement('div')
-  listsContainer.className = 'lists-container'
+export function homePage(lists) {
+  const listsBox = document.createElement('div')
+  listsBox.className = 'lists-box'
 
-  return listsContainer
-}
+  const mainTitle = document.createElement('h1')
+  mainTitle.innerHTML = 'Lists'
 
-export function createListEl(listObj) {
-  const listEl = document.createElement('div')
-  const listTitle = document.createElement('h2')
-  listTitle.innerHTML = listObj.getTitle()
-  listEl.append(listTitle)
+  listsBox.append(mainTitle)
 
-  return listEl
-}
-
-export function populatedListContainer(lists){
-  const myContainer = createListsContainerEl()
   lists.forEach(list => {
-    myContainer.append(createListEl(list))
+    const listContainer = createListContainerEl(list)
+    const listItems = list.getToDos()
+    const filledContainer = populatedListContainer(listItems, listContainer)
+    listsBox.append(filledContainer)
+  })
+
+  return listsBox
+}
+
+function createListContainerEl(list) {
+  const listContainer = document.createElement('div')
+  listContainer.className = 'list-container'
+  const listTitle = document.createElement('h2')
+  listTitle.innerHTML = list.getTitle()
+
+  listContainer.append(listTitle)
+  return listContainer
+}
+
+function createItemsEl(item) {
+  const itemEl = document.createElement('div')
+  itemEl.className = 'todo-item'
+  const itemTitleEl = document.createElement('h2')
+  itemTitleEl.innerHTML = item.getTitle()
+  const itemDueDateEl = document.createElement('p')
+  const formatedDate = format(item.getDueDate(), 'dd MMM y')
+  itemDueDateEl.innerHTML = `Due Date: ${formatedDate}`
+
+  itemEl.append(itemTitleEl, itemDueDateEl)
+  return itemEl
+}
+
+export function populatedListContainer(items, listContainer){
+  items.forEach(item => {
+    listContainer.append(createItemsEl(item))
   });
 
-  return myContainer
+  return listContainer
 }
 
 

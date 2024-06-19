@@ -1,0 +1,16 @@
+main {
+  display: flex;
+  background-color: pink;
+}
+
+.lists-box {
+  border: 2px solid blue;
+}
+
+.list-container {
+  border: 2px solid brown;
+}
+
+.todo-item {
+  border: 2px solid black;
+}

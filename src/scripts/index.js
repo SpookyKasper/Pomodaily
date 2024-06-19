@@ -1,14 +1,18 @@
+
 import '../styles/index.css'
-import createToDoItem from './to-do-item.js';
+import createToDoItem from './items/to-do-item.js';
 import createToDoList from './lists/to-do-lists.js'
-import { populatedListContainer } from './lists/dom-utils.js';
+import { homePage } from './lists/dom-utils.js';
 
 
+const basicLists = ['Personal', 'Work', 'Study', 'Shopping']
 const myToDo = createToDoItem()
-const myList = createToDoList('Build To-Do App')
-myList.addToDo(myToDo)
-const myLists = [myList]
+const myFirstList = createToDoList('Wishlist')
+const myLists = [myFirstList]
+basicLists.forEach(listName => myLists.push(createToDoList(listName)))
 
-document.body.append(populatedListContainer(myLists))
+
+const main = document.querySelector('main')
+main.append(homePage(myLists))
 
 

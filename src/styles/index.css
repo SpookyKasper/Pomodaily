@@ -1,6 +1,14 @@
+
+header {
+  background-color: blue;
+}
+
 body {
+  height: 100vh;
   display: grid;
   grid-template-rows: 200px 1fr 150px;
-  grid-template-rows: 100px 1fr;
-  background-color: pink;
+}
+
+footer {
+  background-color: aqua;
 }
