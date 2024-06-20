@@ -20,3 +20,10 @@ main {
 .todo-item {
   border: 2px solid black;
 }
+
+.new-list-box {
+  min-height: 30px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
