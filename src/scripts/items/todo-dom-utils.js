@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 
-function createItemsEl(item) {
+export default function createItemEl(item) {
   const itemEl = document.createElement('div')
   itemEl.className = 'todo-item'
   const itemTitleEl = document.createElement('h2')

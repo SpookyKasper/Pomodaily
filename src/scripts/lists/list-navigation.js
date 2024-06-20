@@ -1,5 +1,6 @@
 import '../../styles/nav.css'
 import createToDoList from './to-do-lists'
+import createItemEl from '../items/todo-dom-utils'
 
 export default function listNav(myLists = []) {
   const myListNav = createListNavEl()
@@ -48,12 +49,31 @@ function createListButton(listObj) {
   const listButton = document.createElement('button')
   listButton.innerHTML = listObj.getTitle()
   listButton.addEventListener('click', function(){
-    console.log(listObj.getToDos())
+    const mainEl = document.querySelector('main')
+    mainEl.innerHTML = ''
+    const myItemsBox = createItemsBox(listObj)
+    mainEl.appendChild(myItemsBox)
   })
 
   listContainer.append(listButton)
   return listContainer
 }
+
+function createItemsBox(listObj) {
+  const toDoItemsBox = document.createElement('div')
+  toDoItemsBox.className = 'items-box'
+  const toDoItems = listObj.getToDos()
+  toDoItems.forEach((item) => {
+    console.log(item)
+    toDoItemsBox.append(createItemEl(item))
+  })
+
+  return toDoItemsBox
+}
+
+// Pseudocode for listButtons:
+// When the user clicks the button, wipe the content of main
+// For Each item in the toDoS of the list, create a container with the title due date and priority
 
 // Given some lists and a container add the lists to the container
 function populateListNav(lists, listButtons) {

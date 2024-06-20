@@ -12,6 +12,8 @@ const myLists = []
 basicLists.forEach(listName => myLists.push(createToDoList(listName)))
 basicToDos.forEach(todo => myLists[0].addToDo(createToDoItem(todo)))
 
+
+
 const navEl = document.querySelector('nav')
 navEl.append(listNav(myLists))
 
