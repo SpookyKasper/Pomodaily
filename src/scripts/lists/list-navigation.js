@@ -1,6 +1,7 @@
 import '../../styles/nav.css'
 import createToDoList from './to-do-lists'
 import createItemEl from '../items/todo-dom-utils'
+import createToDoItem from '../items/to-do-item'
 
 export default function listNav(myLists = []) {
   const myListNav = createListNavEl()
@@ -19,12 +20,12 @@ function addNewListEl(listSection) {
   const addListBox = document.createElement('div')
   addListBox.className = 'new-list-box'
   const newListInput = document.createElement('input')
-  newListInput.placeholder = 'Add List...'
+  newListInput.placeholder = 'Add Task...'
   const newListButton = document.createElement('button')
   newListButton.innerHTML = '+'
   newListButton.addEventListener('click', () => {
-    const listName = newListInput.value
-    const myFreshList = createToDoList(listName)
+    const listTitle = newListInput.value
+    const myFreshList = createToDoList(listTitle)
     addListToListNav(myFreshList, listSection)
   })
 
@@ -54,8 +55,8 @@ function createListButton(listObj) {
     const myItemsBox = createItemsBox(listObj)
     mainEl.appendChild(myItemsBox)
   })
-
   listContainer.append(listButton)
+
   return listContainer
 }
 
@@ -64,16 +65,33 @@ function createItemsBox(listObj) {
   toDoItemsBox.className = 'items-box'
   const toDoItems = listObj.getToDos()
   toDoItems.forEach((item) => {
-    console.log(item)
     toDoItemsBox.append(createItemEl(item))
   })
+  const addTaskSection = addNewTask(toDoItemsBox)
+  toDoItemsBox.append(addTaskSection)
 
   return toDoItemsBox
 }
 
-// Pseudocode for listButtons:
-// When the user clicks the button, wipe the content of main
-// For Each item in the toDoS of the list, create a container with the title due date and priority
+function addNewTask(itemsBox) {
+  const addTaskBox = document.createElement('div')
+  addTaskBox.className = 'new-task-box'
+  const newTaskInput = document.createElement('input')
+  newTaskInput.placeholder = 'Add Task...'
+  const newTaskButton = document.createElement('button')
+  newTaskButton.innerHTML = '+'
+  newTaskButton.addEventListener('click', () => {
+    const taskTitle = newTaskInput.value
+    const myFreshTask = createToDoItem(taskTitle)
+    console.log(myFreshTask)
+    itemsBox.append(createItemEl(myFreshTask))
+  })
+
+  addTaskBox.append(newTaskInput, newTaskButton)
+  return addTaskBox
+}
+
+
 
 // Given some lists and a container add the lists to the container
 function populateListNav(lists, listButtons) {
