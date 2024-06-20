@@ -4,11 +4,17 @@ main {
 }
 
 .lists-box {
+  height: 100%;
   border: 2px solid blue;
 }
 
 .list-container {
   border: 2px solid brown;
+}
+
+.list-container button {
+  width: 100%;
+  min-height: 30px;
 }
 
 .todo-item {

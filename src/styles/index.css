@@ -1,14 +1,38 @@
-
-header {
-  background-color: blue;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   height: 100vh;
   display: grid;
-  grid-template-rows: 200px 1fr 150px;
+  grid-template-columns: 200px 1fr ;
+  grid-template-rows: 100px 1fr 50px;
+  grid-template-areas:
+   'nav header header'
+   'nav main main'
+   'footer footer footer'
+}
+
+header {
+  background-color: blue;
+  grid-area: header;
+}
+
+nav {
+  grid-area: nav;
+}
+
+nav h1 {
+  height: 100px;
+}
+
+main {
+  grid-area: main;
 }
 
 footer {
+  grid-area: footer;
   background-color: aqua;
 }

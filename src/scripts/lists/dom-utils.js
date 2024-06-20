@@ -1,7 +1,7 @@
 import '../../styles/home.css'
 import { format } from "date-fns";
 
-export function homePage(lists) {
+export function listNavigation(lists) {
   const listsBox = document.createElement('div')
   listsBox.className = 'lists-box'
 
@@ -23,7 +23,7 @@ export function homePage(lists) {
 function createListContainerEl(list) {
   const listContainer = document.createElement('div')
   listContainer.className = 'list-container'
-  const listTitle = document.createElement('h2')
+  const listTitle = document.createElement('button')
   listTitle.innerHTML = list.getTitle()
 
   listContainer.append(listTitle)
@@ -45,7 +45,7 @@ function createItemsEl(item) {
 
 export function populatedListContainer(items, listContainer){
   items.forEach(item => {
-    listContainer.append(createItemsEl(item))
+    // listContainer.append(createItemsEl(item))
   });
 
   return listContainer
