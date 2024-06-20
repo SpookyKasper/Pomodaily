@@ -6,12 +6,11 @@ import listNav, { listNavigation } from './lists/list-navigation.js';
 
 
 const basicLists = ['Personal', 'Work', 'Study', 'Shopping']
-const myToDo = createToDoItem()
-const myFirstList = createToDoList('Wishlist')
-myFirstList.addToDo(myToDo)
-const myLists = [myFirstList]
-basicLists.forEach(listName => myLists.push(createToDoList(listName)))
+const basicToDos = ['Call Mom', 'Play Guitar', 'Go Groceries']
+const myLists = []
 
+basicLists.forEach(listName => myLists.push(createToDoList(listName)))
+basicToDos.forEach(todo => myLists[0].addToDo(createToDoItem(todo)))
 
 const navEl = document.querySelector('nav')
 navEl.append(listNav(myLists))

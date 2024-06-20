@@ -12,3 +12,5 @@ function createItemsEl(item) {
   itemEl.append(itemTitleEl, itemDueDateEl)
   return itemEl
 }
+
+
