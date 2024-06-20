@@ -1,4 +1,4 @@
-export default function createToDoItem(title = 'to-do', description = '', dueDate = new Date(), priority = 'red', status = 'in-progress') {
+export default function createToDoItem(title = 'To-Do', description = '', dueDate = new Date(), priority = '', status = 'not-started') {
 
   let itemTitle = title
   let itemDescription = description
