@@ -1,0 +1,21 @@
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-task-box {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 50px;
+  font-size: x-large;
+}
+
+.new-task-box input {
+  font-size: x-large;
+  padding: 1px 5px;
+}
+
+.new-task-box button {
+  font-size: x-large;
+}
+

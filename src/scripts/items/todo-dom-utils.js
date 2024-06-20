@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import createToDoItem from '../items/to-do-item'
+import '../../styles/items-box.css'
 
 export function createItemEl(item) {
   const itemEl = document.createElement('div')
@@ -29,18 +30,31 @@ export function displayItems(listObj) {
 export function createAddTaskSection(itemsBox, listObj) {
   const addTaskBox = document.createElement('div')
   addTaskBox.className = 'new-task-box'
+  const inputEl = createNewTaskInput()
+  const buttonEl = createAddTaskButton(inputEl, itemsBox, listObj)
+  addTaskBox.append(inputEl, buttonEl)
+  return addTaskBox
+}
+
+const createNewTaskInput = () => {
   const newTaskInput = document.createElement('input')
   newTaskInput.placeholder = 'Add Task...'
-  const newTaskButton = document.createElement('button')
-  newTaskButton.innerHTML = '+'
-  newTaskButton.addEventListener('click', () => {
+  newTaskInput.addEventListener('click', () => {
+  })
+  return newTaskInput
+}
+
+const createAddTaskButton = (inputEl, itemsBox, listObj) => {
+  const addTaskButton = document.createElement('button')
+  addTaskButton.innerHTML = '➕'
+  addTaskButton.addEventListener('click', () => {
     const myFreshTask = createToDoItem()
-    if (newTaskInput.value) { myFreshTask.setTitle(newTaskInput.value) }
+    if (inputEl.value) { myFreshTask.setTitle(inputEl.value) }
     listObj.addToDo(myFreshTask)
     itemsBox.append(createItemEl(myFreshTask))
+    inputEl.value = ''
   })
-  addTaskBox.append(newTaskInput, newTaskButton)
-  return addTaskBox
+  return addTaskButton
 }
 
 
