@@ -1,0 +1,12 @@
+.expanded-item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}
+
+.expanded-item-container input {
+  height: 40px;
+  padding: 10px;
+}
+

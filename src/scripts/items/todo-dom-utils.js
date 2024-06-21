@@ -4,6 +4,9 @@ import '../../styles/items-box.css'
 import expandItem from "./expand-item";
 
 export function createItemEl(item) {
+  const itemLeftDiv = document.createElement('div')
+  itemLeftDiv.className = 'item-left-div'
+
   const itemEl = document.createElement('div')
   itemEl.className = 'todo-item'
 
@@ -19,7 +22,9 @@ export function createItemEl(item) {
   const statusBox = createCheckBox(item)
   const expandButton = createItemExpandButton(item)
 
-  itemEl.append(statusBox, itemTitleEl, itemDueDateEl, expandButton)
+  itemLeftDiv.append(statusBox, itemTitleEl, itemDueDateEl)
+
+  itemEl.append(itemLeftDiv, expandButton)
   return itemEl
 
 }
@@ -27,8 +32,8 @@ export function createItemEl(item) {
 
 function createItemExpandButton(item) {
   const itemExpandButton = document.createElement('button')
-  itemExpandButton.innerHTML = 'Expand'
-  itemExpandButton.className = 'expand-item'
+  itemExpandButton.innerHTML = 'View'
+  itemExpandButton.className = 'expand-item-button'
   itemExpandButton.addEventListener('click', () => {
     expandItem(item)
   })
