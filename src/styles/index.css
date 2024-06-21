@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 body {
   height: 100vh;
   display: grid;
@@ -16,7 +20,7 @@ body {
 }
 
 header {
-  background-color: blue;
+
   grid-area: header;
 }
 
@@ -34,5 +38,9 @@ main {
 
 footer {
   grid-area: footer;
-  background-color: aqua;
+}
+
+
+input:focus {
+  border: 1px solid purple;
 }

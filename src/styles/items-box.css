@@ -1,21 +1,66 @@
+:root {
+  --border-radius: 5px
+}
+
 main {
   display: flex;
   flex-direction: column;
+}
+
+.new-task-box, .items-box {
+  padding: 10px;
+}
+
+.items-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: var(--border-radius);
+}
+
+.item-dialog {
+  width: 50%;
+  margin: auto;
+  background-color: aqua;
+}
+
+.item-due-date {
+  font-size: small;
 }
 
 .new-task-box {
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 50px;
-  font-size: x-large;
 }
 
 .new-task-box input {
-  font-size: x-large;
-  padding: 1px 5px;
+  font-size: medium;
+  padding: 0px 15px;
+  border-radius: var(--border-radius) 0px 0px var(--border-radius);
+  border-right: none;
 }
 
 .new-task-box button {
-  font-size: x-large;
+  /* background-color: white; */
+  font-size: large;
+  border-radius: 0px var(--border-radius) var(--border-radius) 0px;
 }
+
+.new-task-box input:focus + .new-task-box button {
+  background-color: aqua;
+}
+
+.new-task-box button:hover {
+  background-color: lightgray;
+}
+
 

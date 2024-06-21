@@ -1,0 +1,38 @@
+main {
+  display: flex;
+}
+
+.lists-nav {
+  height: 100%;
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+
+.list-container {
+}
+
+.list-container button {
+  width: 100%;
+  min-height: 30px;
+  border: none;
+}
+
+.list-container button:hover {
+  background-color: lightgrey;
+}
+
+.new-list-box {
+  min-height: 30px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.new-list-box input {
+  padding: 5px;
+}
+
+.list-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}

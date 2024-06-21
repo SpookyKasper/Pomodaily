@@ -5,14 +5,45 @@ import '../../styles/items-box.css'
 export function createItemEl(item) {
   const itemEl = document.createElement('div')
   itemEl.className = 'todo-item'
-  const itemTitleEl = document.createElement('h2')
+
+  const itemTitleEl = document.createElement('p')
   itemTitleEl.innerHTML = item.getTitle()
+  itemTitleEl.className = 'item-title'
+
   const itemDueDateEl = document.createElement('p')
+  itemDueDateEl.className = 'item-due-date'
   const formattedDate = format(item.getDueDate(), 'dd MMM y')
   itemDueDateEl.innerHTML = `Due Date: ${formattedDate}`
 
-  itemEl.append(itemTitleEl, itemDueDateEl)
+  const statusBox = createCheckBox(item)
+  const itemDialog = createExpandedItemDialog(item)
+  itemDialog.className = 'item-dialog'
+  const expandButton = createItemExpandButton(item, itemDialog)
+
+  itemEl.append(statusBox, itemTitleEl, itemDueDateEl, itemDialog, expandButton)
   return itemEl
+
+}
+
+function createExpandedItemDialog(item) {
+  const expandedItemDialog = document.createElement('dialog')
+  return expandedItemDialog
+}
+
+function createItemExpandButton(item, itemDialog) {
+  const itemExpandButton = document.createElement('button')
+  itemExpandButton.innerHTML = 'Expand'
+  itemExpandButton.className = 'expand-item'
+  itemExpandButton.addEventListener('click', () => {
+    itemDialog.show()
+  })
+  return itemExpandButton
+}
+
+function createCheckBox(item) {
+  const checkBox = document.createElement('input')
+  checkBox.type = 'checkbox'
+  return checkBox
 }
 
 // Given a list object create a container with all the items in the list
@@ -38,14 +69,16 @@ export function createAddTaskSection(itemsBox, listObj) {
 
 const createNewTaskInput = () => {
   const newTaskInput = document.createElement('input')
-  newTaskInput.placeholder = 'Add Task...'
-  newTaskInput.addEventListener('click', () => {
+  newTaskInput.placeholder = `+ Add Task...`
+  newTaskInput.addEventListener('focus', () => {
+    // const addTaskButton = document.getElementById('add-task-button')
   })
   return newTaskInput
 }
 
 const createAddTaskButton = (inputEl, itemsBox, listObj) => {
   const addTaskButton = document.createElement('button')
+  addTaskButton.id = 'add-task-button'
   addTaskButton.innerHTML = '➕'
   addTaskButton.addEventListener('click', () => {
     const myFreshTask = createToDoItem()

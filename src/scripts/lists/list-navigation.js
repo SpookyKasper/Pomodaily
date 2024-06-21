@@ -1,4 +1,4 @@
-import '../../styles/nav.css'
+import '../../styles/list-nav.css'
 import createToDoList from './to-do-lists'
 import {displayItems, createAddTaskSection} from '../items/todo-dom-utils'
 
@@ -17,7 +17,7 @@ function addNewListEl(listSection) {
   const addListBox = document.createElement('div')
   addListBox.className = 'new-list-box'
   const newListInput = document.createElement('input')
-  newListInput.placeholder = 'Add Task...'
+  newListInput.placeholder = '+ Add List...'
   const newListButton = document.createElement('button')
   newListButton.innerHTML = '+'
   newListButton.addEventListener('click', () => {
@@ -32,9 +32,9 @@ function addNewListEl(listSection) {
 function createListNavEl() {
   const listNav = document.createElement('div')
   listNav.className = 'lists-nav'
-  const mainTitle = document.createElement('h1')
-  mainTitle.innerHTML = 'Lists'
-  listNav.append(mainTitle)
+  const navSectionTitle = document.createElement('h1')
+  navSectionTitle.innerHTML = 'Lists'
+  listNav.append(navSectionTitle)
   return listNav
 }
 
@@ -47,9 +47,12 @@ function createListButton(listObj) {
   listButton.addEventListener('click', function(){
     const mainEl = document.querySelector('main')
     mainEl.innerHTML = ''
+    const itemsSection = document.createElement('div')
+    itemsSection.classList.add('items-section')
     const myItemsBox = displayItems(listObj)
     const addTaskSection = createAddTaskSection(myItemsBox, listObj)
-    mainEl.append(addTaskSection, myItemsBox)
+    itemsSection.append(addTaskSection, myItemsBox)
+    mainEl.append(itemsSection)
   })
   listContainer.append(listButton)
   return listContainer
