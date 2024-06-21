@@ -14,13 +14,12 @@ body {
   grid-template-columns: 200px 1fr ;
   grid-template-rows: 100px 1fr 50px;
   grid-template-areas:
-   'nav header header'
+   'nav main main'
    'nav main main'
    'footer footer footer'
 }
 
 header {
-
   grid-area: header;
 }
 
@@ -28,12 +27,14 @@ nav {
   grid-area: nav;
 }
 
-nav h1 {
-  height: 100px;
-}
-
 main {
   grid-area: main;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.expand-section {
+  border-left: 1px solid gray;
 }
 
 footer {
@@ -41,6 +42,5 @@ footer {
 }
 
 
-input:focus {
-  border: 1px solid purple;
-}
+
+

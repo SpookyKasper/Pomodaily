@@ -45,14 +45,11 @@ function createListButton(listObj) {
   const listButton = document.createElement('button')
   listButton.innerHTML = listObj.getTitle()
   listButton.addEventListener('click', function(){
-    const mainEl = document.querySelector('main')
-    mainEl.innerHTML = ''
-    const itemsSection = document.createElement('div')
-    itemsSection.classList.add('items-section')
+    const itemsSection = document.querySelector('.items-section')
+    itemsSection.innerHTML = ''
     const myItemsBox = displayItems(listObj)
     const addTaskSection = createAddTaskSection(myItemsBox, listObj)
     itemsSection.append(addTaskSection, myItemsBox)
-    mainEl.append(itemsSection)
   })
   listContainer.append(listButton)
   return listContainer

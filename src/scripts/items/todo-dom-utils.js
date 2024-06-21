@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import createToDoItem from '../items/to-do-item'
 import '../../styles/items-box.css'
+import expandItem from "./expand-item";
 
 export function createItemEl(item) {
   const itemEl = document.createElement('div')
@@ -16,26 +17,20 @@ export function createItemEl(item) {
   itemDueDateEl.innerHTML = `Due Date: ${formattedDate}`
 
   const statusBox = createCheckBox(item)
-  const itemDialog = createExpandedItemDialog(item)
-  itemDialog.className = 'item-dialog'
-  const expandButton = createItemExpandButton(item, itemDialog)
+  const expandButton = createItemExpandButton(item)
 
-  itemEl.append(statusBox, itemTitleEl, itemDueDateEl, itemDialog, expandButton)
+  itemEl.append(statusBox, itemTitleEl, itemDueDateEl, expandButton)
   return itemEl
 
 }
 
-function createExpandedItemDialog(item) {
-  const expandedItemDialog = document.createElement('dialog')
-  return expandedItemDialog
-}
 
-function createItemExpandButton(item, itemDialog) {
+function createItemExpandButton(item) {
   const itemExpandButton = document.createElement('button')
   itemExpandButton.innerHTML = 'Expand'
   itemExpandButton.className = 'expand-item'
   itemExpandButton.addEventListener('click', () => {
-    itemDialog.show()
+    expandItem(item)
   })
   return itemExpandButton
 }

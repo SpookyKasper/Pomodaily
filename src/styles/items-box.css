@@ -2,7 +2,7 @@
   --border-radius: 5px
 }
 
-main {
+.items-section {
   display: flex;
   flex-direction: column;
 }
