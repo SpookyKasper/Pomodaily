@@ -45,6 +45,25 @@ footer {
   grid-area: footer;
 }
 
+.priority-icon {
+  max-height: 20px;
+}
+/* green */
+.low-priority {
+  filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(80deg) ;
+}
+
+/* orange */
+.med-priority {
+  filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(5deg) brightness(130%);
+}
+
+/* red */
+.high-priority {
+  filter: invert(50%) sepia(100%) saturate(10000%) hue-rotate(340deg) brightness(100%);
+
+}
+
 
 
 

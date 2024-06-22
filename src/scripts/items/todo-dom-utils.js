@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import createToDoItem from '../items/to-do-item'
 import '../../styles/items-box.css'
 import expandItem from "./expand-item";
+import flagIcon from '../../images/Icons/flag.svg'
 
 export function createItemEl(item) {
   const itemLeftDiv = document.createElement('div')
@@ -20,14 +21,27 @@ export function createItemEl(item) {
   itemDueDateEl.innerHTML = `Due Date: ${formattedDate}`
 
   const statusBox = createCheckBox(item)
+  const priorityFlag = createPriorityFlag(item)
   const expandButton = createItemExpandButton(item)
 
-  itemLeftDiv.append(statusBox, itemTitleEl, itemDueDateEl)
+  itemLeftDiv.append(priorityFlag, statusBox, itemTitleEl, itemDueDateEl)
 
   itemEl.append(itemLeftDiv, expandButton)
   return itemEl
-
 }
+
+const createPriorityFlag = (item) => {
+  const priorityEl = document.createElement('img')
+  priorityEl.src = flagIcon
+  priorityEl.className = 'priority-icon'
+  setPriorityElColor(item, priorityEl)
+  return priorityEl
+}
+
+const setPriorityElColor = (item, priorityEl) => {
+  priorityEl.classList.add(item.getPriority())
+}
+
 
 
 function createItemExpandButton(item) {

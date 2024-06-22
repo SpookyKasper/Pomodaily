@@ -10,3 +10,15 @@
   padding: 10px;
 }
 
+.priority-box {
+  display: flex;
+
+}
+.priority-btn {
+  text-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+

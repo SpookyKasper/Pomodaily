@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  text-wrap: nowrap;
 }
 
 .item-left-div {
@@ -31,12 +32,6 @@
   padding: 5px;
   border: 1px solid black;
   border-radius: var(--border-radius);
-}
-
-.item-dialog {
-  width: 50%;
-  margin: auto;
-  background-color: aqua;
 }
 
 .item-due-date {

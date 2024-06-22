@@ -6,7 +6,8 @@ export default function listNav(myLists = []) {
   const myListNav = createListNavEl()
   const listsButtons = document.createElement('div')
   listsButtons.className = 'list-buttons'
-  populateListNav(myLists, listsButtons)
+
+  populateListBtnsContainer(myLists, listsButtons)
   const addingListsEl = addNewListEl(listsButtons)
   myListNav.append(listsButtons, addingListsEl)
   return myListNav
@@ -56,15 +57,11 @@ function createListButton(listObj) {
 }
 
 // Given some lists and a container add the lists to the container
-function populateListNav(lists, listButtons) {
+function populateListBtnsContainer(lists, listButtons) {
   lists.forEach(list => {
-    addListToListNav(list, listButtons)
+    const myListButton = createListButton(list)
+    listButtons.append(myListButton)
   })
-}
-
-function addListToListNav(listObj, listButtons) {
-  const myListButton = createListButton(listObj)
-  listButtons.append(myListButton)
 }
 
 
