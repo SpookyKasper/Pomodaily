@@ -16,9 +16,14 @@
 }
 .priority-btn {
   text-wrap: nowrap;
+  font-size: 1vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+#confirm-btn {
+  margin-top: 10px;
+  min-height: 30px;
+}

@@ -10,6 +10,8 @@ export function createItemEl(item) {
 
   const itemEl = document.createElement('div')
   itemEl.className = 'todo-item'
+  const itemId = item.getTitle().toLowerCase()
+  itemEl.id = itemId
 
   const itemTitleEl = document.createElement('p')
   itemTitleEl.innerHTML = item.getTitle()

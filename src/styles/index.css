@@ -61,7 +61,6 @@ footer {
 /* red */
 .high-priority {
   filter: invert(50%) sepia(100%) saturate(10000%) hue-rotate(340deg) brightness(100%);
-
 }
 
 
