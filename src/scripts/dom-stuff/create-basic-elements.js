@@ -14,9 +14,10 @@ export function createDivCI(myClass, id) {
   return myDiv
 }
 
-export function createInputTPV(type='text', placeholder, value) {
+export function createInputTIPV(type='text', id='', placeholder='', value) {
   const myInput = document.createElement('input')
   myInput.type = type
+  myInput.id = id
   myInput.placeholder = placeholder
   myInput.value = value
 
