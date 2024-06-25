@@ -27,3 +27,7 @@
   margin-top: 10px;
   min-height: 30px;
 }
+
+.selected {
+  border: 2px solid salmon;
+}

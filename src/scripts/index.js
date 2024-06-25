@@ -14,7 +14,6 @@ basicToDos.forEach(todo => myLists[0].addToDo(createToDoItem(todo)))
 
 const navEl = document.querySelector('nav')
 navEl.append(listNav(myLists))
-const mainEl = document.querySelector('main')
 const listButtons = document.querySelector('.list-container')
 listButtons.firstChild.click()
 

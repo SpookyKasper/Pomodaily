@@ -1,8 +1,8 @@
 import { format } from "date-fns";
-import createToDoItem from '../items/to-do-item'
 import '../../styles/items-box.css'
-import expandItem from "./expand-item";
 import flagIcon from '../../images/Icons/flag.svg'
+import createToDoItem from '../items/to-do-item'
+import expandItem from "./expand-item";
 
 export function createItemEl(item) {
   const itemLeftDiv = document.createElement('div')
@@ -44,14 +44,13 @@ const setPriorityElColor = (item, priorityEl) => {
   priorityEl.classList.add(item.getPriority())
 }
 
-
-
-function createItemExpandButton(item) {
+function createItemExpandButton(itemObj) {
   const itemExpandButton = document.createElement('button')
   itemExpandButton.innerHTML = 'View'
   itemExpandButton.className = 'expand-item-button'
-  itemExpandButton.addEventListener('click', () => {
-    expandItem(item)
+  itemExpandButton.addEventListener('click', function() {
+    const itemEl = this.parentElement
+    expandItem(itemObj, itemEl)
   })
   return itemExpandButton
 }
@@ -67,8 +66,10 @@ export function displayItems(listObj) {
   const toDoItemsBox = document.createElement('div')
   toDoItemsBox.className = 'items-box'
   const toDoItems = listObj.getToDos()
-  toDoItems.forEach((item) => {
-    toDoItemsBox.append(createItemEl(item))
+  toDoItems.forEach((item, index) => {
+    const myItem = createItemEl(item)
+    myItem.id = `item-${index}`
+    toDoItemsBox.append(myItem)
   })
 
   return toDoItemsBox
@@ -99,11 +100,16 @@ const createAddTaskButton = (inputEl, itemsBox, listObj) => {
   addTaskButton.addEventListener('click', () => {
     const myFreshTask = createToDoItem()
     if (inputEl.value) { myFreshTask.setTitle(inputEl.value) }
+    const myFreshItemEl = createItemEl(myFreshTask)
+    const freshIndex = listObj.getToDos().length
+    console.log(listObj)
+    myFreshItemEl.id = `item-${freshIndex}`
+    itemsBox.append(myFreshItemEl)
     listObj.addToDo(myFreshTask)
-    itemsBox.append(createItemEl(myFreshTask))
     inputEl.value = ''
   })
   return addTaskButton
 }
 
+// const addTask = (inputEl, itemsBox, listObj)
 

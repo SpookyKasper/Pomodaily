@@ -4,47 +4,61 @@ import { format } from "date-fns";
 import _ from 'lodash'
 import { createButtonCI, createDivCI, createInputTPV } from '../dom-stuff/create-basic-elements'
 
-export default function expandItem(item) {
+export default function expandItem(itemObj, itemEl) {
   const expandSection = document.querySelector('.expand-section')
-  const expandedItem = createExpandedItemEl(item)
+  const expandedItem = createExpandedItemEl(itemObj, itemEl)
   expandSection.innerHTML = ''
   expandSection.append(expandedItem)
 }
 
-const createExpandedItemEl = (item) => {
+const createExpandedItemEl = (itemObj, itemEl) => {
   const expandedItemContainer = createDivCI('expanded-item-container')
-  const itemStatus = item.getStatus()
-  const itemTitleEl = createInputTPV(undefined, undefined, item.getTitle())
-  itemTitleEl.id = 'title-input'
-  const dueDateInputValue = format(item.getDueDate(), 'yyyy-MM-dd')
-  const itemDueDateEl = createInputTPV('date', undefined, dueDateInputValue)
-  itemDueDateEl.id = 'due-date-input'
-  const itemDescriptionEl = createInputTPV('textarea', '+ Add Description', item.getDescription())
-  itemDescriptionEl.id = 'description-input'
-  const priorityBox = createPriorityButtonsBox(item)
+  const itemStatus = itemObj.getStatus()
+  const itemTitleInput = createInputTPV(undefined, undefined, itemObj.getTitle())
+  itemTitleInput.id = 'title-input'
+  const dueDateInputValue = format(itemObj.getDueDate(), 'yyyy-MM-dd')
+  const itemDueDateInput = createInputTPV('date', undefined, dueDateInputValue)
+  itemDueDateInput.id = 'due-date-input'
+  const itemDescriptionInput = createInputTPV('textarea', '+ Add Description', itemObj.getDescription())
+  itemDescriptionInput.id = 'description-input'
+  const priorityButtonsBox = createPriorityButtonsBox(itemObj, itemEl)
   const confirmBtn = createButtonCI(undefined, 'confirm-btn')
-  addPropertiesToConfirmBtn(confirmBtn, item, itemTitleEl, itemDueDateEl, itemDescriptionEl)
-  expandedItemContainer.append(itemTitleEl, itemDueDateEl, itemDescriptionEl, priorityBox, confirmBtn)
+  confirmBtn.textContent = 'Confirm'
+  confirmBtn.addEventListener('click', () => {
+    expandedItemContainer.innerHTML = ''
+    document.querySelector
+    updateItemObj(itemObj, itemTitleInput, itemDueDateInput, itemDescriptionInput)
+    updateItemEl(itemEl, itemObj)
+  })
+
+  expandedItemContainer.append(itemTitleInput, itemDueDateInput, itemDescriptionInput, priorityButtonsBox, confirmBtn)
 
   return expandedItemContainer
 }
 
-const addPropertiesToConfirmBtn = (confirmBtn, item, titleI, dueDateI, descriptionI) => {
-  confirmBtn.textContent = 'Confirm'
-  confirmBtn.addEventListener('click', () => {
-    item.setTitle(titleI.value)
-    if (dueDateI) { item.setDueDate.value}
-    item.setDescription(descriptionI.value)
-  })
+const updateItemObj = (itemObj, titleInput, dueDateI, descriptionI) => {
+  itemObj.setTitle(titleInput.value)
+  itemObj.setDueDate(dueDateI.value)
+  itemObj.setDescription(descriptionI.value)
 }
 
-const createPriorityButtonsBox = (item) => {
-  const priorityBox = createDivCI('priority-box')
+const updateItemEl = (itemEl, itemObj) => {
+  const titleEl = itemEl.querySelector('.item-title')
+  titleEl.innerHTML = itemObj.getTitle()
+  const dueDateEl = itemEl.querySelector('.item-due-date')
+  const formattedDate = format(itemObj.getDueDate(), 'dd MMM y')
+  dueDateEl.innerHTML = `Due Date: ${formattedDate}`
+}
+
+const createPriorityButtonsBox = (item, itemEl) => {
+  const priorityButtonsBox = createDivCI('priority-box')
   const priorityOptions = ['low-priority', 'med-priority', 'high-priority', 'no-priority']
 
   // create each priority button
   priorityOptions.forEach(priorityOption => {
     const priorityBtn = createButtonCI('priority-button')
+    if (priorityOption === item.getPriority()) { priorityBtn.classList.add('selected')}
+
     const priorityTitle = document.createElement('p')
     priorityTitle.innerHTML = _.startCase(priorityOption)
     const flagIconEl = document.createElement('img')
@@ -52,17 +66,15 @@ const createPriorityButtonsBox = (item) => {
     flagIconEl.classList.add(priorityOption, 'priority-icon')
     // Add functionality to button
     priorityBtn.addEventListener('click', () => {
-      const itemId = item.getTitle().toLowerCase()
-      const itemEl = document.getElementById(itemId)
       item.setPriority(priorityOption)
       setPriorityElColor(itemEl, priorityOption, priorityOptions)
     })
 
     priorityBtn.append(priorityTitle, flagIconEl)
-    priorityBox.append(priorityBtn)
+    priorityButtonsBox.append(priorityBtn)
   })
 
-  return priorityBox
+  return priorityButtonsBox
 }
 
 
