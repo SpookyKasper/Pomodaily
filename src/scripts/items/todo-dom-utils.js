@@ -94,7 +94,7 @@ export function displayItems(listObj) {
   toDoItems.forEach((item, index) => {
     const myItem = createItemEl(item)
     myItem.id = `item-${index}`
-    toDoItemsBox.append(myItem)
+    if (!item.getDeleted()) { toDoItemsBox.append(myItem) }
   })
 
   return toDoItemsBox

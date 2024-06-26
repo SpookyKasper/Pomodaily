@@ -1,10 +1,17 @@
-export default function createToDoItem(title = 'To-Do', description = '', dueDate = new Date(), priority = 'no-priority', status = 'not-started') {
+export default function createToDoItem(
+  title='To-Do',
+  description='',
+  dueDate=new Date(),
+  priority='no-priority',
+  status='not-started',
+  deleted=false) {
 
   let itemTitle = title
   let itemDescription = description
   let itemDueDate = dueDate
   let itemPriority = priority
   let itemStatus = status
+  let itemDeleted = deleted
 
   const getTitle = () => itemTitle
   const setTitle = (newTitle) => itemTitle = newTitle
@@ -16,6 +23,8 @@ export default function createToDoItem(title = 'To-Do', description = '', dueDat
   const setPriority = (newPriority) => itemPriority = newPriority
   const getStatus = () => itemStatus
   const setStatus = (newStatus) => itemStatus = newStatus
+  const getDeleted = () => itemDeleted
+  const setDeleted = (newDeleted) => itemDeleted = newDeleted
 
   return {
     getTitle,
@@ -27,6 +36,8 @@ export default function createToDoItem(title = 'To-Do', description = '', dueDat
     getPriority,
     setPriority,
     getStatus,
-    setStatus
+    setStatus,
+    getDeleted,
+    setDeleted
   }
 }

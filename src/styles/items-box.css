@@ -58,6 +58,7 @@
 .new-task-box button {
   /* background-color: white; */
   font-size: large;
+  border-color: black;
   border-radius: 0px var(--border-radius) var(--border-radius) 0px;
 }
 

@@ -5,11 +5,19 @@
 }
 
 button {
-  padding: 0px 10px;
+  padding: 5px 10px;
+  background-color: white;
+  border: 1px solid lightblue;
+  border-radius: 5px;
+}
+
+button.selected {
+  background-color: rgb(225, 228, 247);
 }
 
 button:hover {
   cursor: pointer;
+  background-color: lightgrey;
 }
 
 body {
@@ -20,7 +28,7 @@ body {
   grid-template-areas:
    'nav main main'
    'nav main main'
-   'footer footer footer'
+   'nav main main'
 }
 
 header {

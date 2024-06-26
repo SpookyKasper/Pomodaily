@@ -2,7 +2,7 @@ import '../../styles/expand.css'
 import flagIcon from '../../images/Icons/flag.svg'
 import { format } from "date-fns";
 import _ from 'lodash'
-import { createButtonCI, createDivCI, createInputTIPV } from '../dom-stuff/create-basic-elements'
+import { createButtonCIT, createDivCI, createInputTIPV } from '../dom-stuff/create-basic-elements'
 
 export default function expandItem(itemObj, itemEl) {
   const expandSection = document.querySelector('.expand-section')
@@ -18,17 +18,26 @@ const createExpandedItemEl = (itemObj, itemEl) => {
   const itemDueDateInput = createInputTIPV('date', 'due-date-input', undefined, dueDateInputValue)
   const itemDescriptionInput = createInputTIPV('textarea', 'description-input', 'Add Description', itemObj.getDescription())
   const priorityButtonsBox = createPriorityButtonsBox(itemObj, itemEl)
-  const confirmBtn = createButtonCI(undefined, 'confirm-btn')
-  confirmBtn.textContent = 'Confirm'
+  const deleteItemBtn = createDeleteItemButton(itemObj, itemEl)
+  const confirmBtn = createButtonCIT(undefined, 'confirm-btn', 'Confirm')
   confirmBtn.addEventListener('click', () => {
     expandedItemContainer.innerHTML = ''
     updateItemObj(itemObj, itemTitleInput, itemDueDateInput, itemDescriptionInput)
     updateItemEl(itemEl, itemObj)
   })
 
-  expandedItemContainer.append(itemTitleInput, itemDueDateInput, itemDescriptionInput, priorityButtonsBox, confirmBtn)
+  expandedItemContainer.append(itemTitleInput, itemDueDateInput, itemDescriptionInput, priorityButtonsBox, confirmBtn, deleteItemBtn)
 
   return expandedItemContainer
+}
+
+const createDeleteItemButton = (item, itemEl, list) => {
+  const deleteItemBtn = createButtonCIT(undefined, 'delete-item-btn', '🗑 Delete')
+  deleteItemBtn.addEventListener('click', () => {
+    item.setDeleted(true)
+    itemEl.remove()
+  })
+  return deleteItemBtn
 }
 
 const updateItemObj = (itemObj, titleInput, dueDateInput, descriptionInput) => {
@@ -51,7 +60,7 @@ const createPriorityButtonsBox = (item, itemEl) => {
 
   // create each priority button
   priorityOptions.forEach(priorityOption => {
-    const priorityBtn = createButtonCI('priority-button')
+    const priorityBtn = createButtonCIT('priority-button')
     if (priorityOption === item.getPriority()) { priorityBtn.classList.add('selected')}
 
     const priorityTitle = document.createElement('p')

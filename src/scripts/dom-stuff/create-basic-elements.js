@@ -1,7 +1,8 @@
-export function createButtonCI(myClass, id='') {
+export function createButtonCIT(myClass, id='', text='') {
   const myButton = document.createElement('button')
   myButton.classList.add(myClass)
   myButton.id = id
+  myButton.innerHTML = text
 
   return myButton
 }
