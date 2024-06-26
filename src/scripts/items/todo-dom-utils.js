@@ -3,6 +3,7 @@ import '../../styles/items-box.css'
 import flagIcon from '../../images/Icons/flag.svg'
 import createToDoItem from '../items/to-do-item'
 import expandItem from "./expand-item";
+import { createInputTIPV } from "../dom-stuff/create-basic-elements";
 
 export function createItemEl(item) {
   const itemLeftDiv = document.createElement('div')
@@ -57,8 +58,22 @@ function createItemExpandButton(itemObj) {
 
 function createCheckBox(item) {
   const checkBox = document.createElement('input')
+  const itemStatus =  item.getStatus()
+  displayStatus(checkBox, itemStatus)
+  checkBox.addEventListener('click', () => {
+    updateItemStatus(item, checkBox)
+  })
   checkBox.type = 'checkbox'
   return checkBox
+}
+
+function updateItemStatus(item, box) {
+  box.checked ? item.setStatus('done') : item.setStatus('not-started')
+}
+
+function displayStatus(box, status) {
+  if (status === 'not-started') { box.checked = false }
+  if (status === 'done') { box.checked = true }
 }
 
 // Given a list object create a container with all the items in the list
@@ -78,19 +93,10 @@ export function displayItems(listObj) {
 export function createAddTaskSection(itemsBox, listObj) {
   const addTaskBox = document.createElement('div')
   addTaskBox.className = 'new-task-box'
-  const inputEl = createNewTaskInput()
+  const inputEl = createInputTIPV('text', undefined, '+ Add Task...')
   const buttonEl = createAddTaskButton(inputEl, itemsBox, listObj)
   addTaskBox.append(inputEl, buttonEl)
   return addTaskBox
-}
-
-const createNewTaskInput = () => {
-  const newTaskInput = document.createElement('input')
-  newTaskInput.placeholder = `+ Add Task...`
-  newTaskInput.addEventListener('focus', () => {
-    // const addTaskButton = document.getElementById('add-task-button')
-  })
-  return newTaskInput
 }
 
 const createAddTaskButton = (inputEl, itemsBox, listObj) => {
@@ -102,7 +108,6 @@ const createAddTaskButton = (inputEl, itemsBox, listObj) => {
     if (inputEl.value) { myFreshTask.setTitle(inputEl.value) }
     const myFreshItemEl = createItemEl(myFreshTask)
     const freshIndex = listObj.getToDos().length
-    console.log(listObj)
     myFreshItemEl.id = `item-${freshIndex}`
     itemsBox.append(myFreshItemEl)
     listObj.addToDo(myFreshTask)

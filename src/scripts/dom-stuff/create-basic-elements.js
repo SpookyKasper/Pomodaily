@@ -1,4 +1,4 @@
-export function createButtonCI(myClass='', id='') {
+export function createButtonCI(myClass, id='') {
   const myButton = document.createElement('button')
   myButton.classList.add(myClass)
   myButton.id = id
@@ -6,7 +6,7 @@ export function createButtonCI(myClass='', id='') {
   return myButton
 }
 
-export function createDivCI(myClass='', id='') {
+export function createDivCI(myClass, id='') {
   const myDiv = document.createElement('div')
   myDiv.classList.add(myClass)
   myDiv.id = id

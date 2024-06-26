@@ -13,7 +13,6 @@ export default function expandItem(itemObj, itemEl) {
 
 const createExpandedItemEl = (itemObj, itemEl) => {
   const expandedItemContainer = createDivCI('expanded-item-container')
-  const itemStatus = itemObj.getStatus()
   const itemTitleInput = createInputTIPV(undefined, 'title-input', 'Title', itemObj.getTitle())
   const dueDateInputValue = format(itemObj.getDueDate(), 'yyyy-MM-dd')
   const itemDueDateInput = createInputTIPV('date', 'due-date-input', undefined, dueDateInputValue)
@@ -32,10 +31,10 @@ const createExpandedItemEl = (itemObj, itemEl) => {
   return expandedItemContainer
 }
 
-const updateItemObj = (itemObj, titleInput, dueDateI, descriptionI) => {
+const updateItemObj = (itemObj, titleInput, dueDateInput, descriptionInput) => {
   itemObj.setTitle(titleInput.value)
-  itemObj.setDueDate(dueDateI.value)
-  itemObj.setDescription(descriptionI.value)
+  itemObj.setDueDate(dueDateInput.value)
+  itemObj.setDescription(descriptionInput.value)
 }
 
 const updateItemEl = (itemEl, itemObj) => {
