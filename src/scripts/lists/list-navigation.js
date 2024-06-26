@@ -1,10 +1,12 @@
 import '../../styles/list-nav.css'
 import createToDoList from './to-do-lists'
 import {displayItems, createAddTaskSection} from '../items/todo-dom-utils'
-import { createDivCI } from '../dom-stuff/create-basic-elements'
+import { createDivCI, createInputTIPV, createTitle } from '../dom-stuff/create-basic-elements'
 
 export default function listNav(myLists = []) {
-  const myListNav = createListNavEl()
+  const myListNav = createDivCI('list-nav')
+  const listNavTitle = createTitle('h1', 'Lists')
+  myListNav.append(listNavTitle)
   const listButtons = createDivCI('list-buttons')
   populateListBtnsContainer(myLists, listButtons)
   const addingListsEl = addNewListEl(listButtons)
@@ -12,27 +14,17 @@ export default function listNav(myLists = []) {
   return myListNav
 }
 
-// Create a The container for the lists with a title
-function createListNavEl() {
-  const listNav = createDivCI('list-nav')
-  const navSectionTitle = document.createElement('h1')
-  navSectionTitle.innerHTML = 'Lists'
-  listNav.append(navSectionTitle)
-  return listNav
-}
-
 // Given a list section, create an input and and button to add lists to the section
 function addNewListEl(listSection) {
-  const addListBox = document.createElement('div')
-  addListBox.className = 'new-list-box'
-  const newListInput = document.createElement('input')
-  newListInput.placeholder = '+ Add List...'
+  const addListBox = createDivCI('new-list-box')
+  const newListInput = createInputTIPV('text', undefined, '+ Add List...')
   const newListButton = document.createElement('button')
   newListButton.innerHTML = '+'
   newListButton.addEventListener('click', () => {
     const listTitle = newListInput.value
     const myFreshList = createToDoList(listTitle)
     listSection.append(createListButton(myFreshList))
+    newListInput.value = ''
   })
   addListBox.append(newListInput, newListButton)
   return addListBox
