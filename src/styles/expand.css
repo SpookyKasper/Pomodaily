@@ -27,3 +27,8 @@
   margin-top: 10px;
   min-height: 30px;
 }
+
+.expand-item-button {
+  filter: none;
+  border: 2px solid blue;
+}

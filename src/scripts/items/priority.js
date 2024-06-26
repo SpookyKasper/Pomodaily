@@ -9,20 +9,6 @@ export function createPriorityFlag() {
   return priorityFlag
 }
 
-const setElementPriorityColor = (priority, element) => {
-  element.classList.add(priority)
-}
-
-const removeElementPriorityColor = (element) => {
-  const options = getPriorityOptions()
-  options.forEach(option => element.classList.remove(option))
-}
-
-const getPriorityOptions = () => {
-  const priorityOptions = ['low-priority', 'med-priority', 'high-priority', 'no-priority']
-  return priorityOptions
-}
-
 export function createPriorityButtonsBox (itemObj, itemEl) {
   const priorityButtonsBox = createDivCI('priority-box')
   const priorityOptions = getPriorityOptions()
@@ -31,11 +17,6 @@ export function createPriorityButtonsBox (itemObj, itemEl) {
     priorityButtonsBox.append(myPriorityBtn)
   })
   return priorityButtonsBox
-}
-
-const displaySelection = (element) => {
-  if (priorityOption === item.getPriority()) { priorityBtn.classList.add('selected')}
-  element.classList.add('selected')
 }
 
 const createPriorityBtn = (priority, itemObj, itemEl) => {
@@ -47,21 +28,42 @@ const createPriorityBtn = (priority, itemObj, itemEl) => {
   const priorityFlag = createPriorityFlag()
   setElementPriorityColor(priority, priorityFlag)
 
+  const flagIcon = itemEl.querySelector('.priority-icon')
+
   priorityBtn.addEventListener('click', () => {
+    itemObj.setPriority(priority)
     removeElementPriorityColor(itemEl)
-    setElementPriorityColor(priority, itemEl)
+    setElementPriorityColor(priority, flagIcon)
   })
 
   priorityBtn.append(priorityTitle, priorityFlag)
   return priorityBtn
 }
 
+const getPriorityOptions = () => {
+  const priorityOptions = ['low-priority', 'med-priority', 'high-priority', 'no-priority']
+  return priorityOptions
+}
 
+const setElementPriorityColor = (priority, element) => {
+  element.classList.add(priority)
+}
+
+const removeElementPriorityColor = (element) => {
+  const options = getPriorityOptions()
+  options.forEach(option => element.classList.remove(option))
+}
 
 const removeSelectionDisplay = () => {
   const prioBtns = document.querySelectorAll('.priority-button')
   prioBtns.forEach(button => button.classList.remove('selected'))
 }
+
+const displaySelection = (element) => {
+  if (priorityOption === item.getPriority()) { priorityBtn.classList.add('selected')}
+  element.classList.add('selected')
+}
+
 
 const setPriorityElColor = (itemEl, priorityOption, priorityOptions) => {
   const flagEl = itemEl.querySelector('.priority-icon')
