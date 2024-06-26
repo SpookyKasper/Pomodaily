@@ -56,9 +56,10 @@ footer {
 .priority-icon {
   max-height: 20px;
 }
+
 /* green */
 .low-priority {
-  filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(80deg) ;
+  filter: invert(50%) sepia(100%) saturate(1000%) hue-rotate(80deg);
 }
 
 /* orange */

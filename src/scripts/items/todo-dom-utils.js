@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import '../../styles/items-box.css'
-import flagIcon from '../../images/Icons/flag.svg'
 import createToDoItem from '../items/to-do-item'
+import { createPriorityFlag } from "./priority";
 import expandItem from "./expand-item";
 import { createInputTIPV } from "../dom-stuff/create-basic-elements";
 
@@ -31,18 +31,6 @@ export function createItemEl(item) {
 
   itemEl.append(itemLeftDiv, expandButton)
   return itemEl
-}
-
-const createPriorityFlag = (item) => {
-  const priorityEl = document.createElement('img')
-  priorityEl.src = flagIcon
-  priorityEl.className = 'priority-icon'
-  setPriorityElColor(item, priorityEl)
-  return priorityEl
-}
-
-const setPriorityElColor = (item, priorityEl) => {
-  priorityEl.classList.add(item.getPriority())
 }
 
 function createItemExpandButton(itemObj) {
