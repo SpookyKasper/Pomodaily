@@ -23,7 +23,7 @@ export function createItemEl(item) {
   const formattedDate = format(item.getDueDate(), 'dd MMM y')
   itemDueDateEl.innerHTML = `Due Date: ${formattedDate}`
 
-  const statusBox = createCheckBox(item)
+  const statusBox = createCheckBox(item, itemLeftDiv)
   const priorityFlag = createPriorityFlag(item)
   const expandButton = createItemExpandButton(item)
 
@@ -56,10 +56,10 @@ function createItemExpandButton(itemObj) {
   return itemExpandButton
 }
 
-function createCheckBox(item) {
+function createCheckBox(item, itemLeftDiv) {
   const checkBox = document.createElement('input')
   const itemStatus =  item.getStatus()
-  displayStatus(checkBox, itemStatus)
+  displayStatus(checkBox, itemStatus, itemLeftDiv)
   checkBox.addEventListener('click', () => {
     updateItemStatus(item, checkBox)
   })
@@ -68,12 +68,22 @@ function createCheckBox(item) {
 }
 
 function updateItemStatus(item, box) {
-  box.checked ? item.setStatus('done') : item.setStatus('not-started')
+  if (box.checked) {
+    item.setStatus('done')
+    box.parentElement.classList.add('strike')
+  } else {
+    item.setStatus('not-started')
+    box.parentElement.classList.remove('strike')
+  }
+
 }
 
-function displayStatus(box, status) {
+function displayStatus(box, status, itemLeftDiv) {
   if (status === 'not-started') { box.checked = false }
-  if (status === 'done') { box.checked = true }
+  if (status === 'done') {
+    box.checked = true
+    itemLeftDiv.classList.add('strike')
+  }
 }
 
 // Given a list object create a container with all the items in the list
