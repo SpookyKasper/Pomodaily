@@ -1,6 +1,7 @@
 import '../../styles/list-nav.css'
 import createTaskList from './task-lists'
-import {displayTasks, createAddTaskSection} from '../tasks/task-utils'
+import { createAddTaskSection } from '../tasks/add-task'
+import {displayTasks} from '../tasks/task-utils'
 import { createDivCI, createInputTIPV, createTitle } from '../dom-stuff/create-basic-elements'
 
 export default function listNav(myLists = []) {
