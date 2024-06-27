@@ -2,29 +2,29 @@
   --border-radius: 5px
 }
 
-.items-section {
+.tasks-section {
   display: flex;
   flex-direction: column;
 }
 
-.new-task-box, .items-box {
+.new-task-box, .tasks-box {
   padding: 10px;
 }
 
-.items-box {
+.tasks-box {
   display: flex;
   flex-direction: column;
   gap: 5px;
   text-wrap: nowrap;
 }
 
-.item-left-div {
+.task-info-section {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.todo-item {
+.task {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,7 +38,7 @@
   text-decoration: line-through;
 }
 
-.item-due-date {
+.task-due-date {
   font-size: small;
 }
 

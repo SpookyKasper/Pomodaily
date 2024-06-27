@@ -1,11 +1,11 @@
-.expanded-item-container {
+.expanded-task-container {
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 10px;
 }
 
-.expanded-item-container input {
+.expanded-task-container input {
   height: 40px;
   padding: 10px;
 }
@@ -28,7 +28,7 @@
   min-height: 30px;
 }
 
-.expand-item-button {
+.expand-task-button {
   filter: none;
   border: 2px solid blue;
 }

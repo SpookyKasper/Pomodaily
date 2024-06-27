@@ -1,16 +1,16 @@
 
 import '../styles/index.css'
-import createToDoItem from './items/to-do-item.js';
-import createToDoList from './lists/to-do-lists.js'
+import createTask from './tasks/task.js';
+import createTaskList from './lists/task-lists.js';
 import listNav from './lists/list-navigation.js';
 
 
 const basicLists = ['To-Do-List', 'Personal', 'Work', 'Study', 'Shopping']
-const basicToDos = ['Call Mom', 'Play Guitar', 'Go Groceries']
+const basicTasks = ['Call Mom', 'Play Guitar', 'Go Groceries']
 const myLists = []
 
-basicLists.forEach(listName => myLists.push(createToDoList(listName)))
-basicToDos.forEach(todo => myLists[0].addToDo(createToDoItem(todo)))
+basicLists.forEach(listName => myLists.push(createTaskList(listName)))
+basicTasks.forEach(task => myLists[0].addTask(createTask(task)))
 
 const navEl = document.querySelector('nav')
 navEl.append(listNav(myLists))

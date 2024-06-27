@@ -32,3 +32,11 @@ export function createTitle(importance, text='') {
   return myTitle
 }
 
+export function createParagraphTCI(text='', myClass, id='') {
+  const myParagraph = document.createElement('p')
+  myParagraph.innerHTML = text
+  myParagraph.classList.add(myClass)
+
+  return myParagraph
+}
+
