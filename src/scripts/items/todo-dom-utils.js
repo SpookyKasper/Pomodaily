@@ -1,7 +1,8 @@
 import { format } from "date-fns";
 import '../../styles/items-box.css'
 import createToDoItem from '../items/to-do-item'
-import { createPriorityFlag } from "./priority";
+import { createItemPriorityFlag } from "./priority";
+
 import expandItem from "./expand-item";
 import { createInputTIPV } from "../dom-stuff/create-basic-elements";
 
@@ -11,6 +12,7 @@ export function createItemEl(item) {
 
   const itemEl = document.createElement('div')
   itemEl.className = 'todo-item'
+
   const itemId = item.getTitle().toLowerCase()
   itemEl.id = itemId
 
@@ -24,7 +26,7 @@ export function createItemEl(item) {
   itemDueDateEl.innerHTML = `Due Date: ${formattedDate}`
 
   const statusBox = createCheckBox(item, itemLeftDiv)
-  const priorityFlag = createPriorityFlag(item)
+  const priorityFlag = createItemPriorityFlag(item)
   const expandButton = createItemExpandButton(item)
 
   itemLeftDiv.append(priorityFlag, statusBox, itemTitleEl, itemDueDateEl)

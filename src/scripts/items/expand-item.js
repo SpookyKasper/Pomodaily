@@ -2,7 +2,7 @@ import '../../styles/expand.css'
 import flagIcon from '../../images/Icons/flag.svg'
 import { format } from "date-fns";
 import _ from 'lodash'
-import { createPriorityButtonsBox } from '..//items/priority.js'
+import { createPriorityButtonsBox, setElementPriorityColor } from '..//items/priority.js'
 import { createButtonCIT, createDivCI, createInputTIPV } from '../dom-stuff/create-basic-elements'
 
 export default function expandItem(itemObj, itemEl) {
