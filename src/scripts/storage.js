@@ -18,6 +18,7 @@ function loadTask(key) {
 }
 
 export function buildTaskBack(taskKey) {
+  console.log(taskKey)
   const task = loadTask(taskKey)
   const myTask = createTask(task)
   myTask.setTitle(task.title)

@@ -3,7 +3,7 @@ import '../styles/index.css'
 import createTask from './tasks/task.js';
 import createTaskList from './lists/task-lists.js';
 import listNav from './lists/list-navigation.js';
-import { createStorage, buildTaskBack } from './storage.js'
+import { buildTaskBack } from './storage.js'
 
 
 
@@ -14,11 +14,9 @@ const myLists = []
 basicLists.forEach(listName => myLists.push(createTaskList(listName)))
 basicTasks.forEach(task => myLists[0].addTask(createTask(task)))
 
-// localStorage.clear()
-
-const key = 1
-if (localStorage.getItem(key)) {
-  const mySavedTask = buildTaskBack(key)
+const storedTasks = localStorage.getItem('index')
+for (let i = 0; i < storedTasks; i++) {
+  const mySavedTask = buildTaskBack(`task-${i}`)
   myLists[0].addTask(mySavedTask)
 }
 
