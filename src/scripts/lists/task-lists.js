@@ -1,10 +1,12 @@
 
-export default function createTaskList(title = '', tasks = []) {
+export default function createTaskList(title = '', tasks = [], id) {
   const listTitle = title
   const listTasks = tasks
+  const listId = id
 
   const getTitle = () => listTitle
   const getTasks = () => listTasks
+  const getId = () => listId
   const addTask = (task) => {
     listTasks.push(task)
   }
@@ -12,6 +14,7 @@ export default function createTaskList(title = '', tasks = []) {
   return {
     getTitle,
     getTasks,
-    addTask
+    addTask,
+    getId
   }
 }

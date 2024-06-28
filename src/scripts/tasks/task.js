@@ -1,12 +1,14 @@
 export default function createTask(
+  listId=0,
   title='No Title',
   description='',
   dueDate=new Date(),
   priority='no-priority',
   status='not-started',
-  deleted=false
+  deleted=false,
 ){
 
+  let taskListId = listId
   let taskTitle = title
   let taskDescription = description
   let taskDueDate = dueDate
@@ -14,6 +16,8 @@ export default function createTask(
   let taskStatus = status
   let taskDeleted = deleted
 
+  const getListId = () => taskListId
+  const setListId = (newListId) => taskListId
   const getTitle = () => taskTitle
   const setTitle = (newTitle) => taskTitle = newTitle
   const getDescription = () => taskDescription
@@ -39,6 +43,8 @@ export default function createTask(
   }
 
   return {
+    getListId,
+    setListId,
     getTitle,
     setTitle,
     getDescription,

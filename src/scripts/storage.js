@@ -11,6 +11,10 @@ export function storeTask(task) {
   localStorage.setItem('index', storageIdx++)
 }
 
+export function storeList(list) {
+
+}
+
 function loadTask(key) {
   const myTaskString = localStorage.getItem(key)
   const taskObject = JSON.parse(myTaskString)
@@ -18,7 +22,6 @@ function loadTask(key) {
 }
 
 export function buildTaskBack(taskKey) {
-  console.log(taskKey)
   const task = loadTask(taskKey)
   const myTask = createTask(task)
   myTask.setTitle(task.title)
