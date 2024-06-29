@@ -1,0 +1,28 @@
+.new-task-box {
+  display: grid;
+  margin: 10px 0px;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 50px;
+}
+
+.new-task-box input {
+  font-size: medium;
+  padding: 0px 15px;
+  border-radius: var(--border-radius) 0px 0px var(--border-radius);
+  border-right: none;
+}
+
+.new-task-box button {
+  /* background-color: white; */
+  font-size: large;
+  border-color: black;
+  border-radius: 0px var(--border-radius) var(--border-radius) 0px;
+}
+
+.new-task-box input:focus + .new-task-box button {
+  background-color: aqua;
+}
+
+.new-task-box button:hover {
+  background-color: lightgray;
+}

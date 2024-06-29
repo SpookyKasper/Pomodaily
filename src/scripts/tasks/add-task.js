@@ -1,6 +1,7 @@
+import '../../styles/add-task.css'
+import createTask from "./task"
 import { createInputTIPV, createDivCI, createButtonCIT} from "../dom-stuff/create-basic-elements"
 import { createTaskEl } from "./task-utils"
-import createTask from "./task"
 import { storeTask }from '../storage'
 
 export function createAddTaskSection(tasksBox, listObj) {
@@ -14,15 +15,26 @@ export function createAddTaskSection(tasksBox, listObj) {
 const createAddTaskButton = (inputEl, tasksBox, listObj) => {
   const addTaskButton = createButtonCIT(undefined, 'add-task-button', '➕')
   addTaskButton.addEventListener('click', () => {
-    const freshTask = createTask(listObj.getId())
-    if (inputEl.value) { freshTask.setTitle(inputEl.value) }
-    const freshTaskEl = createTaskEl(freshTask)
-    const taskId = listObj.getTasks().length
-    freshTaskEl.id = `task-${taskId}`
+    const freshTaskObj = createTaskObj(listObj, inputEl)
+    const freshTaskEl = createFreshTaskEl(freshTaskObj, listObj)
     tasksBox.append(freshTaskEl)
-    listObj.addTask(freshTask)
-    storeTask(freshTask)
     inputEl.value = ''
   })
   return addTaskButton
+}
+
+const createTaskObj = (listObj, inputEl) => {
+  const listId = listObj.getId()
+  const title = inputEl.value
+  const myTaskObj = createTask(listId, title)
+  listObj.addTask(myTaskObj)
+  storeTask(myTaskObj)
+  return myTaskObj
+}
+
+const createFreshTaskEl = (taskObj, listObj) => {
+  const freshTaskEl = createTaskEl(taskObj)
+  const taskId = listObj.getTasks().length
+  freshTaskEl.id = `task-${taskId}`
+  return freshTaskEl
 }
