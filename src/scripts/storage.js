@@ -1,36 +1,53 @@
+import createTaskList from "./lists/task-lists"
 import createTask from "./tasks/task"
 
+
 // localStorage.clear()
-let storageIdx = localStorage.getItem('index')
+
+export function storeList(list) {
+  const listId = list.getId()
+  const myListObj = list.getObj()
+  const listString = JSON.stringify(myListObj)
+  localStorage.setItem(`list-${listId}`, listString)
+}
+
+export function buildListBack(listKey) {
+  const savedList = retrieveObject(listKey)
+  const myList = createTaskList(savedList.id, savedList.title)
+  return myList
+}
+
+function retrieveObject(key) {
+  const myListString = localStorage.getItem(key)
+  const listObject = JSON.parse(myListString)
+  return listObject
+}
+
+export function getItemsIncluding(subString) {
+  const storageKeys = Object.keys(localStorage)
+  const listCount = storageKeys.filter(el => el.includes(subString))
+  return listCount
+}
 
 export function storeTask(task) {
   const myPropertiesObj = task.getPropertiesObj()
   const taskString = JSON.stringify(myPropertiesObj)
-  const startIdx = storageIdx || 0
+  const startIdx = localStorage.getItem('index') || 0
+  let nextIndex = parseInt(startIdx) + 1
   localStorage.setItem(`task-${startIdx}`, taskString)
-  localStorage.setItem('index', storageIdx++)
-}
-
-export function storeList(list) {
-
-}
-
-function loadTask(key) {
-  const myTaskString = localStorage.getItem(key)
-  const taskObject = JSON.parse(myTaskString)
-  return taskObject
+  localStorage.setItem('index', nextIndex)
 }
 
 export function buildTaskBack(taskKey) {
-  const task = loadTask(taskKey)
-  const myTask = createTask(task)
+  const task = retrieveObject(taskKey)
+  const myTask = createTask()
+  myTask.setListId(task.listId)
   myTask.setTitle(task.title)
   myTask.setDescription(task.description)
   myTask.setDueDate(task.dueDate)
   myTask.setPriority(task.priority)
   myTask.setStatus(task.status)
   myTask.setDeleted(task.deleted)
-
   return myTask
 }
 

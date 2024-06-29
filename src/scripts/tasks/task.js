@@ -1,5 +1,5 @@
 export default function createTask(
-  listId=0,
+  listId,
   title='No Title',
   description='',
   dueDate=new Date(),
@@ -16,8 +16,9 @@ export default function createTask(
   let taskStatus = status
   let taskDeleted = deleted
 
+
   const getListId = () => taskListId
-  const setListId = (newListId) => taskListId
+  const setListId = (newListId) => taskListId = newListId
   const getTitle = () => taskTitle
   const setTitle = (newTitle) => taskTitle = newTitle
   const getDescription = () => taskDescription
@@ -33,6 +34,7 @@ export default function createTask(
 
   const getPropertiesObj = () => {
     return {
+      listId: getListId(),
       title: getTitle(),
       description: getDescription(),
       dueDate: getDueDate(),

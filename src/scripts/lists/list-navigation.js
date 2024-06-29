@@ -3,6 +3,7 @@ import createTaskList from './task-lists'
 import { createAddTaskSection } from '../tasks/add-task'
 import {displayTasks} from '../tasks/task-utils'
 import { createDivCI, createInputTIPV, createTitle } from '../dom-stuff/create-basic-elements'
+import { storeList, getStoredListsCount, getItemsIncluding} from '../storage'
 
 export default function listNav(myLists = []) {
   const myListNav = createDivCI('list-nav')
@@ -23,7 +24,9 @@ function addNewListEl(listSection) {
   newListButton.innerHTML = '+'
   newListButton.addEventListener('click', () => {
     const listTitle = newListInput.value
-    const myFreshList = createTaskList(listTitle)
+    const numList = getItemsIncluding('list').length
+    const myFreshList = createTaskList(numList, listTitle)
+    storeList(myFreshList)
     listSection.append(createListButton(myFreshList))
     newListInput.value = ''
   })

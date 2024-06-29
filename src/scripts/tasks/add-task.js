@@ -14,7 +14,7 @@ export function createAddTaskSection(tasksBox, listObj) {
 const createAddTaskButton = (inputEl, tasksBox, listObj) => {
   const addTaskButton = createButtonCIT(undefined, 'add-task-button', '➕')
   addTaskButton.addEventListener('click', () => {
-    const freshTask = createTask()
+    const freshTask = createTask(listObj.getId())
     if (inputEl.value) { freshTask.setTitle(inputEl.value) }
     const freshTaskEl = createTaskEl(freshTask)
     const taskId = listObj.getTasks().length
