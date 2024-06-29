@@ -5,17 +5,14 @@
 .tasks-section {
   display: flex;
   flex-direction: column;
-}
-
-.new-task-box, .tasks-box {
-  padding: 10px;
+  margin: 10px;
 }
 
 .tasks-box {
   display: flex;
   flex-direction: column;
-  gap: 5px;
   text-wrap: nowrap;
+  gap: 5px;
 }
 
 .task-info-section {
@@ -42,8 +39,15 @@
   font-size: small;
 }
 
+#delete-list {
+  /* background-color: pink; */
+  position: absolute;
+  bottom: 20px;
+}
+
 .new-task-box {
   display: grid;
+  margin: 10px 0px;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 50px;
 }

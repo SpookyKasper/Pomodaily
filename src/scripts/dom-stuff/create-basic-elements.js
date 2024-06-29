@@ -25,7 +25,7 @@ export function createInputTIPV(type='text', id='', placeholder='', value='') {
   return myInput
 }
 
-export function createTitle(importance, text='') {
+export function createTitleST(importance, text='') {
   const myTitle = document.createElement(importance)
   myTitle.innerHTML = text
 

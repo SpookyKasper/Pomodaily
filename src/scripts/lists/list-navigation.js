@@ -2,12 +2,12 @@ import '../../styles/list-nav.css'
 import createTaskList from './task-lists'
 import { createAddTaskSection } from '../tasks/add-task'
 import {displayTasks} from '../tasks/task-utils'
-import { createDivCI, createInputTIPV, createTitle } from '../dom-stuff/create-basic-elements'
-import { storeList, getStoredListsCount, getItemsIncluding} from '../storage'
+import { createButtonCIT, createDivCI, createInputTIPV, createTitleST} from '../dom-stuff/create-basic-elements'
+import { storeList, getItemsIncluding, buildListBack} from '../storage'
 
 export default function listNav(myLists = []) {
   const myListNav = createDivCI('list-nav')
-  const listNavTitle = createTitle('h1', 'Lists')
+  const listNavTitle = createTitleST('h2', 'Lists')
   myListNav.append(listNavTitle)
   const listButtons = createDivCI('list-buttons')
   populateListBtnsContainer(myLists, listButtons)
@@ -36,19 +36,30 @@ function addNewListEl(listSection) {
 
 // Given a list object create a container with a button that can display the list content
 function createListButton(listObj) {
-  const listContainer = document.createElement('div')
-  listContainer.className = 'list-container'
-  const listButton = document.createElement('button')
-  listButton.innerHTML = listObj.getTitle()
+  const listContainer = createDivCI('list-container')
+  const listButton = createButtonCIT('list-button', `list-button-${listObj.getId()}`, listObj.getTitle())
   listButton.addEventListener('click', function(){
     const tasksSection = document.querySelector('.tasks-section')
     tasksSection.innerHTML = ''
+    const tasksTitle = createTitleST('h1', listObj.getTitle())
     const myTasksBox = displayTasks(listObj)
     const addTaskSection = createAddTaskSection(myTasksBox, listObj)
-    tasksSection.append(addTaskSection, myTasksBox)
+    const deleteListButton = createButtonCIT(undefined, 'delete-list', '🗑 Delete List')
+    deleteListButton.addEventListener('click', () => deleteList(listObj, listContainer) )
+    tasksSection.append(tasksTitle, addTaskSection, myTasksBox, deleteListButton)
   })
   listContainer.append(listButton)
   return listContainer
+}
+
+// Delete lists
+function deleteList(listObj, listContainer) {
+  const storedListsKeys = getItemsIncluding('list')
+  const storedListToDelete = storedListsKeys.find(key => buildListBack(key).getId() === listObj.getId())
+  localStorage.removeItem(storedListToDelete)
+  const buttonToDelete = document.getElementById(`list-button-${listObj.getId()}`)
+  console.log(buttonToDelete)
+  listContainer.removeChild(buttonToDelete)
 }
 
 // Given some lists and a container add the lists to the container
