@@ -2,7 +2,7 @@ import '../../styles/add-task.css'
 import createTask from "./task"
 import { createInputTIPV, createDivCI, createButtonCIT} from "../dom-stuff/create-basic-elements"
 import { createTaskEl } from "./task-utils"
-import { storeTask }from '../storage'
+import { getItemsIncluding, storeTask }from '../storage'
 
 export function createAddTaskSection(tasksBox, listObj) {
   const addTaskBox = createDivCI('new-task-box')
@@ -24,9 +24,11 @@ const createAddTaskButton = (inputEl, tasksBox, listObj) => {
 }
 
 const createTaskObj = (listObj, inputEl) => {
-  const listId = listObj.getId()
-  const title = inputEl.value
-  const myTaskObj = createTask(listId, title)
+  const myTaskObj = createTask()
+  const taskCount = getItemsIncluding('task').length
+  myTaskObj.setId(taskCount)
+  myTaskObj.setListId(listObj.getId())
+  myTaskObj.setTitle(inputEl.value)
   listObj.addTask(myTaskObj)
   storeTask(myTaskObj)
   return myTaskObj

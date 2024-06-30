@@ -5,17 +5,15 @@ export default function createTask(
   dueDate=new Date(),
   priority='no-priority',
   status='not-started',
-  deleted=false,
 ){
 
+  let taskId = undefined
   let taskListId = listId
   let taskTitle = title
   let taskDescription = description
   let taskDueDate = dueDate
   let taskPriority = priority
   let taskStatus = status
-  let taskDeleted = deleted
-
 
   const getListId = () => taskListId
   const setListId = (newListId) => taskListId = newListId
@@ -29,8 +27,8 @@ export default function createTask(
   const setPriority = (newPriority) => taskPriority = newPriority
   const getStatus = () => taskStatus
   const setStatus = (newStatus) => taskStatus = newStatus
-  const getDeleted = () => taskDeleted
-  const setDeleted = (newDeleted) => taskDeleted = newDeleted
+  const getId = () => taskId
+  const setId = (newId) => taskId = newId
 
   const getPropertiesObj = () => {
     return {
@@ -40,7 +38,7 @@ export default function createTask(
       dueDate: getDueDate(),
       priority: getPriority(),
       status: getStatus(),
-      deleted: getDeleted()
+      id: getId()
     }
   }
 
@@ -57,8 +55,8 @@ export default function createTask(
     setPriority,
     getStatus,
     setStatus,
-    getDeleted,
-    setDeleted,
-    getPropertiesObj
+    getPropertiesObj,
+    getId,
+    setId
   }
 }

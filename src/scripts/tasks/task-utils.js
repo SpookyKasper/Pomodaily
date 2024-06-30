@@ -58,7 +58,6 @@ const updateTaskStatus = (task, box) => {
     task.setStatus('not-started')
     box.parentElement.classList.remove('strike')
   }
-
 }
 
 function displayStatus(box, status, taskInfoSection) {
@@ -71,13 +70,12 @@ function displayStatus(box, status, taskInfoSection) {
 
 // Given a list object create a container with all the tasks in the list
 export function displayTasks(listObj) {
-  const toDoTasksBox = document.createElement('div')
-  toDoTasksBox.className = 'tasks-box'
+  const toDoTasksBox = createDivCI('tasks-box')
   const toDoTasks = listObj.getTasks()
   toDoTasks.forEach((task, index) => {
     const myTask = createTaskEl(task)
     myTask.id = `task-${index}`
-    if (!task.getDeleted()) { toDoTasksBox.append(myTask) }
+    toDoTasksBox.append(myTask)
   })
 
   return toDoTasksBox

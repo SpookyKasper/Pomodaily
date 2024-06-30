@@ -3,13 +3,15 @@ import '../styles/index.css'
 import createTask from './tasks/task.js';
 import createTaskList from './lists/task-lists.js';
 import listNav from './lists/list-navigation.js';
-import { buildListBack, buildTaskBack, storeList, getItemsIncluding } from './storage.js'
+import { buildListBack, buildTaskBack, storeList, getItemsIncluding, storeTask } from './storage.js'
 
 
 const basicListNames = ['To-Do-List', 'Personal', 'Work', 'Study', 'Shopping']
 const basicTaskNames = ['Call Mom', 'Play Guitar', 'Go Groceries']
 const myLists = []
 const myTasks = []
+
+// localStorage.clear()
 
 // Add basic lists
 basicListNames.forEach((listName, idx) => {
@@ -21,8 +23,16 @@ basicListNames.forEach((listName, idx) => {
 const savedLists = getItemsIncluding('list').sort()
 savedLists.forEach(listKey => myLists.push(buildListBack(listKey)))
 
-// Add initial tasks
-basicTaskNames.forEach((taskName, idx) => myTasks.push(createTask(idx, taskName)))
+// Create initial tasks
+basicTaskNames.forEach((taskName, idx) => {
+  const myTask = createTask()
+  myTask.setListId(idx)
+  myTask.setTitle(taskName)
+  myTask.setId(idx)
+  storeTask(myTask)
+})
+
+// Add initial tasks to their respective lists
 myTasks.forEach(task => {
   const motherList = myLists.find(list => list.getId() === task.getListId())
   motherList.addTask(task)

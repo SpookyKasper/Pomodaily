@@ -13,7 +13,8 @@ export function storeList(list) {
 
 export function buildListBack(listKey) {
   const savedList = retrieveObject(listKey)
-  const myList = createTaskList(savedList.id, savedList.title)
+  const myList = createTaskList(savedList.id)
+  myList.setTitle(savedList.title)
   return myList
 }
 
@@ -32,10 +33,8 @@ export function getItemsIncluding(subString) {
 export function storeTask(task) {
   const myPropertiesObj = task.getPropertiesObj()
   const taskString = JSON.stringify(myPropertiesObj)
-  const startIdx = localStorage.getItem('index') || 0
-  let nextIndex = parseInt(startIdx) + 1
-  localStorage.setItem(`task-${startIdx}`, taskString)
-  localStorage.setItem('index', nextIndex)
+  const taskId = task.getId()
+  localStorage.setItem(`task-${taskId}`, taskString)
 }
 
 export function buildTaskBack(taskKey) {
@@ -47,7 +46,7 @@ export function buildTaskBack(taskKey) {
   myTask.setDueDate(task.dueDate)
   myTask.setPriority(task.priority)
   myTask.setStatus(task.status)
-  myTask.setDeleted(task.deleted)
+  myTask.setId(task.id)
   return myTask
 }
 
