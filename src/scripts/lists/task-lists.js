@@ -1,5 +1,5 @@
 
-let idCounter = 0
+let idCounter = -1
 
 export default function createTaskList(title = '', tasks = []) {
   let listId = ++idCounter

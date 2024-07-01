@@ -25,8 +25,6 @@ const createAddTaskButton = (inputEl, tasksBox, listObj) => {
 
 const createTaskObj = (listObj, inputEl) => {
   const myTaskObj = createTask()
-  const taskCount = getItemsIncluding('task').length
-  myTaskObj.setId(taskCount)
   myTaskObj.setListId(listObj.getId())
   myTaskObj.setTitle(inputEl.value)
   listObj.addTask(myTaskObj)

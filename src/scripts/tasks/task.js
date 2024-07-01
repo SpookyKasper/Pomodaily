@@ -1,3 +1,6 @@
+
+let idCounter = 0
+
 export default function createTask(
   listId,
   title='No Title',
@@ -7,7 +10,7 @@ export default function createTask(
   status='not-started',
 ){
 
-  let taskId = undefined
+  let taskId = ++idCounter
   let taskListId = listId
   let taskTitle = title
   let taskDescription = description

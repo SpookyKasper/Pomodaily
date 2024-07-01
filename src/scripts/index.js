@@ -18,8 +18,18 @@ basicListNames.forEach((listName) => {
 })
 
 // Add saved lists
-const savedLists = getItemsIncluding('list').sort()
-savedLists.forEach(listKey => {
+const sortItems = (array) => {
+  const sortedItems = array.sort((a, b) => {
+    const first = parseInt(a.split('-')[1])
+    const second = parseInt(b.split('-')[1])
+    return first - second
+  })
+  return sortedItems
+}
+
+const savedLists = getItemsIncluding('list')
+const sortedLists = sortItems(savedLists)
+sortedLists.forEach(listKey => {
   const retrievedList = buildListBack(listKey)
   myLists.push(retrievedList)
 })
@@ -47,6 +57,7 @@ const storedTasks = getItemsIncluding('task').sort()
  })
 
 // Append it all to the dom
+myLists.forEach(list => console.log(list.getId()))
 const navEl = document.querySelector('nav')
 navEl.append(listNav(myLists))
 const listButtons = document.querySelector('.list-container')

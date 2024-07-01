@@ -17,7 +17,6 @@ export default function createAddListSection(listSection) {
 
 const addListBtnFunctionality = (listSection, input) => {
   const listObj = createTaskList(input.value)
-  console.log(listObj.getId())
   storeList(listObj)
   listSection.append(createListButton(listObj))
   input.value = ''
