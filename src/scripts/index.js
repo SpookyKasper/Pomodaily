@@ -11,24 +11,24 @@ const basicTaskNames = ['Call Mom', 'Play Guitar', 'Go Groceries']
 const myLists = []
 const myTasks = []
 
-// localStorage.clear()
-
 // Add basic lists
-basicListNames.forEach((listName, idx) => {
-  const myNewList = createTaskList(idx, listName)
+basicListNames.forEach((listName) => {
+  const myNewList = createTaskList(listName)
   storeList(myNewList)
 })
 
 // Add saved lists
 const savedLists = getItemsIncluding('list').sort()
-savedLists.forEach(listKey => myLists.push(buildListBack(listKey)))
+savedLists.forEach(listKey => {
+  const retrievedList = buildListBack(listKey)
+  myLists.push(retrievedList)
+})
 
 // Create initial tasks
 basicTaskNames.forEach((taskName, idx) => {
   const myTask = createTask()
   myTask.setListId(idx)
   myTask.setTitle(taskName)
-  myTask.setId(idx)
   storeTask(myTask)
 })
 

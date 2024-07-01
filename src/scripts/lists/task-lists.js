@@ -1,9 +1,13 @@
-export default function createTaskList(id, title = '', tasks = []) {
-  const listId = id
+
+let idCounter = 0
+
+export default function createTaskList(title = '', tasks = []) {
+  let listId = ++idCounter
   let listTitle = title
   let listTasks = tasks
 
   const getId = () => listId
+  const setId = (newId) => listId = newId
   const getTitle = () => listTitle
   const setTitle = (newTitle) => listTitle = newTitle
   const getTasks = () => listTasks
@@ -20,6 +24,7 @@ export default function createTaskList(id, title = '', tasks = []) {
 
   return {
     getId,
+    setId,
     getTitle,
     setTitle,
     getTasks,

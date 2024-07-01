@@ -14,11 +14,12 @@ export default function createAddListSection(listSection) {
   return addListBox
 }
 
+
 const addListBtnFunctionality = (listSection, input) => {
-  const numList = getItemsIncluding('list').length
-  const myFreshList = createTaskList(numList, input.value)
-  storeList(myFreshList)
-  listSection.append(createListButton(myFreshList))
+  const listObj = createTaskList(input.value)
+  console.log(listObj.getId())
+  storeList(listObj)
+  listSection.append(createListButton(listObj))
   input.value = ''
 }
 

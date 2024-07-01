@@ -13,8 +13,9 @@ export function storeList(list) {
 
 export function buildListBack(listKey) {
   const savedList = retrieveObject(listKey)
-  const myList = createTaskList(savedList.id)
+  const myList = createTaskList()
   myList.setTitle(savedList.title)
+  myList.setId(savedList.id)
   return myList
 }
 

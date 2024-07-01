@@ -7,7 +7,7 @@ export function createDeleteTaskButton(taskObj, taskEl) {
   return deleteTaskBtn
 }
 
-const deleteTask = (taskObj, taskEl) => {
+export const deleteTask = (taskObj, taskEl) => {
   const taskId = taskObj.getId()
   delTaskFromStorage(taskId)
   taskEl.remove()
