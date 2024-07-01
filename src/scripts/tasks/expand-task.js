@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import _ from 'lodash'
 import { createPriorityButtonsBox } from '..//tasks/priority.js'
 import { createButtonCIT, createDivCI, createInputTIPV } from '../dom-stuff/create-basic-elements'
-import { buildTaskBack, getItemsIncluding, storeTask } from '../storage.js';
+import { createDeleteTaskButton } from './del-task.js';
 
 export default function expandTask(taskObj, taskEl) {
   const expandSection = document.querySelector('.expand-section')
@@ -26,25 +26,8 @@ const createExpandedTaskEl = (taskObj, taskEl) => {
     updateTaskObj(taskObj, taskTitleInput, taskDueDateInput, taskDescriptionInput)
     updateTaskEl(taskEl, taskObj)
   })
-
   expandedTaskContainer.append(taskTitleInput, taskDueDateInput, taskDescriptionInput, priorityButtonsBox, confirmBtn, deleteTaskBtn)
-
   return expandedTaskContainer
-}
-
-const createDeleteTaskButton = (task, taskEl) => {
-  const deleteTaskBtn = createButtonCIT(undefined, 'delete-task-btn', '🗑 Delete')
-  deleteTaskBtn.addEventListener('click', () => {
-    taskEl.remove()
-    deleteStoredTask(task)
-  })
-  return deleteTaskBtn
-}
-
-const deleteStoredTask = (taskObj) => {
-  const storedTasks = getItemsIncluding('task')
-  const taskToDel = storedTasks.find(task => buildTaskBack(task).getId() === taskObj.getId())
-  localStorage.removeItem(taskToDel)
 }
 
 const updateTaskObj = (taskObj, titleInput, dueDateInput, descriptionInput) => {
