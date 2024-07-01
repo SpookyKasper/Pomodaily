@@ -2,7 +2,8 @@ import { createDivCI, createInputTIPV, createButtonCIT, createTitleST } from "..
 import { displayTasks } from "../tasks/task-utils"
 import { createAddTaskSection } from "../tasks/add-task"
 import createTaskList from "./task-lists"
-import { buildListBack, getItemsIncluding, storeList } from "../storage"
+import { getItemsIncluding, storeList } from "../storage"
+import deleteList from "./del-list"
 
 export default function createAddListSection(listSection) {
   const addListBox = createDivCI('new-list-box')
@@ -35,21 +36,8 @@ function generateTasksSection(listObj, listContainer) {
   const myTasksBox = displayTasks(listObj)
   const addTaskSection = createAddTaskSection(myTasksBox, listObj)
   const deleteListButton = createButtonCIT(undefined, 'delete-list', '🗑 Delete List')
-  deleteListButton.addEventListener('click', () => deleteList(listObj, listContainer) )
+  deleteListButton.addEventListener('click', () => deleteList(listObj, listContainer, tasksSection) )
   tasksSection.innerHTML = ''
   tasksSection.append(tasksTitle, addTaskSection, myTasksBox, deleteListButton)
-}
-
-function deleteList(listObj, listContainer) {
-  const storedListsKeys = getItemsIncluding('list')
-  const storedListToDelete = storedListsKeys.find(key => buildListBack(key).getId() === listObj.getId())
-  localStorage.removeItem(storedListToDelete)
-  const buttonIdToDel = `list-button-${listObj.getId()}`
-  const buttonToDelete = document.getElementById(buttonIdToDel)
-  listContainer.removeChild(buttonToDelete)
-}
-
-const deleteTasksInList = () => {
-
 }
 
