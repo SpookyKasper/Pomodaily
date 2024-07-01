@@ -3,7 +3,7 @@ import { displayTasks } from "../tasks/task-utils"
 import { createAddTaskSection } from "../tasks/add-task"
 import createTaskList from "./task-lists"
 import { getItemsIncluding, storeList } from "../storage"
-import deleteList from "./del-list"
+import createDelListBtn from "./del-list"
 
 export default function createAddListSection(listSection) {
   const addListBox = createDivCI('new-list-box')
@@ -35,9 +35,8 @@ function generateTasksSection(listObj, listContainer) {
   const tasksTitle = createTitleST('h1', listObj.getTitle())
   const myTasksBox = displayTasks(listObj)
   const addTaskSection = createAddTaskSection(myTasksBox, listObj)
-  const deleteListButton = createButtonCIT(undefined, 'delete-list', '🗑 Delete List')
-  deleteListButton.addEventListener('click', () => deleteList(listObj, listContainer, tasksSection) )
+  const delListBtn = createDelListBtn(listObj, listContainer, tasksSection)
   tasksSection.innerHTML = ''
-  tasksSection.append(tasksTitle, addTaskSection, myTasksBox, deleteListButton)
+  tasksSection.append(tasksTitle, addTaskSection, myTasksBox, delListBtn)
 }
 

@@ -1,7 +1,15 @@
+import { createButtonCIT } from "../dom-stuff/create-basic-elements"
 import { buildListBack, buildTaskBack, getItemsIncluding } from "../storage"
 
-export default function deleteList(listObj, listContainer, tasksSection) {
+
+export default function createDelListBtn(listObj, listContainer, tasksSection){
   const listId = listObj.getId()
+  const deleteListButton = createButtonCIT(undefined, 'delete-list', '🗑 Delete List')
+  deleteListButton.addEventListener('click', () => deleteList(listId, listContainer, tasksSection) )
+  return deleteListButton
+}
+
+const deleteList = (listId, listContainer, tasksSection) => {
   deleteTasksInList(listId)
   deleteListFromStorage(listId)
   deleteListFromDom(listId, listContainer)
