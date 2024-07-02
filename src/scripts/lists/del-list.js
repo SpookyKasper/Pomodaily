@@ -1,5 +1,5 @@
 import { createButtonCIT } from "../dom-stuff/create-basic-elements"
-import { buildListBack, buildTaskBack, getItemsIncluding } from "../storage"
+import { buildListBack, buildTaskBack, getItemsIncluding, retrieveObject } from "../storage"
 
 
 export default function createDelListBtn(listObj, listContainer, tasksSection){
@@ -18,15 +18,17 @@ const deleteList = (listId, listContainer, tasksSection) => {
 
 const deleteTasksInList = (listId) => {
   const storedTasks = getItemsIncluding('task')
-  const listTasks = storedTasks.filter(task => buildTaskBack(task).getListId() === listId)
+  const listTasks = storedTasks.filter(task => retrieveObject(task).listId === listId)
   listTasks.forEach(task => localStorage.removeItem(task))
 }
 
+
 const deleteListFromStorage = (listId) => {
   const storedListsKeys = getItemsIncluding('list')
-  const storedListToDelete = storedListsKeys.find(key => buildListBack(key).getId() === listId)
+  const storedListToDelete = storedListsKeys.find(key => retrieveObject(key).id === listId)
   localStorage.removeItem(storedListToDelete)
 }
+
 
 const deleteListFromDom = (listId, listContainer) => {
   const listButtonId = `list-button-${listId}`

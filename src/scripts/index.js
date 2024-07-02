@@ -3,7 +3,7 @@ import '../styles/index.css'
 import createTask from './tasks/task.js';
 import createTaskList from './lists/task-lists.js';
 import listNav from './lists/list-navigation.js';
-import { buildListBack, buildTaskBack, storeList, getItemsIncluding, storeTask } from './storage.js'
+import { sortStoredItems, buildListBack, buildTaskBack, storeList, getItemsIncluding, storeTask } from './storage.js'
 
 
 const basicListNames = ['To-Do-List', 'Personal', 'Work', 'Study', 'Shopping']
@@ -18,17 +18,8 @@ basicListNames.forEach((listName) => {
 })
 
 // Add saved lists
-const sortItems = (array) => {
-  const sortedItems = array.sort((a, b) => {
-    const first = parseInt(a.split('-')[1])
-    const second = parseInt(b.split('-')[1])
-    return first - second
-  })
-  return sortedItems
-}
-
 const savedLists = getItemsIncluding('list')
-const sortedLists = sortItems(savedLists)
+const sortedLists = sortStoredItems(savedLists)
 sortedLists.forEach(listKey => {
   const retrievedList = buildListBack(listKey)
   myLists.push(retrievedList)
@@ -50,7 +41,8 @@ myTasks.forEach(task => {
 
 // Add stored tasks
 const storedTasks = getItemsIncluding('task').sort()
- storedTasks.forEach((key) => {
+const sortedTasks = sortStoredItems(storedTasks)
+ sortedTasks.forEach((key) => {
   const mySavedTask = buildTaskBack(key)
   const taskListIdx = mySavedTask.getListId()
   myLists[taskListIdx].addTask(mySavedTask)

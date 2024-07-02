@@ -3,16 +3,26 @@ import createTask from "./tasks/task"
 
 
 // localStorage.clear()
-function retrieveObject(key) {
+export function retrieveObject(key) {
   const myListString = localStorage.getItem(key)
   const listObject = JSON.parse(myListString)
   return listObject
 }
 
+
 export function getItemsIncluding(subString) {
   const storageKeys = Object.keys(localStorage)
   const listCount = storageKeys.filter(el => el.includes(subString))
   return listCount
+}
+
+export function sortStoredItems(array) {
+  const sortedItems = array.sort((a, b) => {
+    const first = parseInt(a.split('-')[1])
+    const second = parseInt(b.split('-')[1])
+    return first - second
+  })
+  return sortedItems
 }
 
 export function storeList(list) {
@@ -49,5 +59,3 @@ export function buildTaskBack(taskKey) {
   myTask.setId(task.id)
   return myTask
 }
-
-
